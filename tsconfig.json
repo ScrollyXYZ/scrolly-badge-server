@@ -3,7 +3,7 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+    "target": "ES2020",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "include": ["./src/**/*"]
 }
