@@ -7,11 +7,24 @@ const http_errors_1 = __importDefault(require("http-errors"));
 const express_1 = __importDefault(require("express"));
 require("dotenv/config.js");
 const http_1 = __importDefault(require("http"));
+const cors_1 = __importDefault(require("cors"));
 const error_1 = require("./helpers/error");
 const badge_1 = __importDefault(require("./api/badge"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+// Add a list of allowed origins.
+// If you have more origins you would like to add, you can add them to the array below.
+const allowedOrigins = [
+    "https://scroll.io",
+    /^https:\/\/.+\.scroll\.io$/,
+    "https://scrolly.xyz",
+    /^https:\/\/.+\.scrolly\.xyz$/,
+];
+const options = {
+    origin: allowedOrigins,
+};
+app.use((0, cors_1.default)(options));
 app.get("/", (_req, res) => res.send("Scrolly badge API"));
 app.get("/api/", (_req, res) => res.send("Scrolly badge API 1"));
 app.use("/api/badge/", badge_1.default);
