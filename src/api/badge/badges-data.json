@@ -1,30 +1,79 @@
 [
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/0.png",
-    "title": "Unrevealed"
+    "name": "Unrevealed",
+    "description": "Unrevealed badge",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "0"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/1.png",
-    "title": "Scrolly Baby"
+    "name": "Scrolly Baby",
+    "description": "Scrolly Baby - Level 1",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "1"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/2.png",
-    "title": "Scrolly Novice"
+    "name": "Scrolly Novice",
+    "description": "Scrolly Novice - Level 2",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "2"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/3.png",
-    "title": "Scrolly Explorer"
+    "name": "Scrolly Explorer",
+    "description": "Scrolly Explorer - Level 3",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "3"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/4.png",
-    "title": "Master Mapper"
+    "name": "Master Mapper",
+    "description": "Master Mapper - Level 4",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "4"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/5.png",
-    "title": "Carto Maestro"
+    "name": "Carto Maestro",
+    "description": "Carto Maestro - Level 5",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "5"
+      }
+    ]
   },
   {
     "image": "https://cyan-passive-guan-475.mypinata.cloud/ipfs/QmY9rG94E1qpc5NPs1zFTM1hCCTmv9kiRvMoZjGyxCJ2ZE/6.png",
-    "title": "Grand Cartographer of Scrolly"
+    "name": "Grand Cartographer of Scrolly",
+    "description": "Grand Cartographer of Scrolly - Level 6",
+    "attributes": [
+      {
+        "trait_type": "level",
+        "value": "6"
+      }
+    ]
   }
 ]
