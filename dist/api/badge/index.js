@@ -13,9 +13,8 @@ const provider = new ethers_1.ethers.JsonRpcProvider(process.env.RPC_ENDPOINT);
 const signer = new ethers_1.ethers.Wallet(process.env.SIGNER_PRIVATE_KEY).connect(provider);
 const badgeRouter = (() => {
     const router = express_1.default.Router();
-    // token data query:
-    // url: {{pathname}}/api/badge/token?level={{level}}
-    // http://127.0.0.1:3000/api/badge/token?level=5"
+    // Resolves token data
+    // url: localhost:3000/api/badge/token?level={{level}}
     router.get("/token", async (req, res) => {
         const level = parseInt(req.query.level);
         let badgeData = badges_1.badgeJsons[0];
@@ -31,23 +30,28 @@ const badgeRouter = (() => {
         console.log("returning badge:", badgeData);
         return res.json(badgeData);
     });
-    // example eligibility query:
-    // url: {{pathname}}/api/badge/check?badge={{badgeContractAddress}}&recipient={{walletAddress}}
-    // curl "http://127.0.0.1:3000/api/badge/check?badge=0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82&recipient=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    // Resolves eligibility:
+    // curl 'localhost:3000/api/badge/check?badge={{badge}}&recipient={{wallet}}'
     router.get("/check", async (req, res) => {
         const { badge, recipient } = req.query;
         const badgeContractAddress = badge;
         const walletAddress = recipient;
         if (!walletAddress)
-            return res.json({ error: 'missing query parameter "walletAddress"' });
+            return res.json({
+                code: 0,
+                message: 'missing query parameter "recipient"',
+            });
         if (!badgeContractAddress)
-            return res.json({ error: 'missing parameter "address"' });
+            return res.json({ code: 0, message: 'missing parameter "badge"' });
         const scrollyBadge = badges_1.badges[(0, lib_1.normalizeAddress)(badgeContractAddress)];
         if (!scrollyBadge)
-            return res.json({ error: `unknown badge "${badgeContractAddress}"` });
-        console.log("Checking eligibility for wallet", walletAddress);
-        console.log("With scrollyBadge", scrollyBadge);
+            return res.json({
+                code: 0,
+                message: `unknown badge  "${badgeContractAddress}"`,
+            });
+        console.log(`Checking eligibility for wallet "${walletAddress}" With scrollyBadge "${scrollyBadge}"`);
         const isEligible = await scrollyBadge.isEligible(walletAddress);
+        // Only return 'success' if elegible is true
         if (isEligible === true)
             return res.json({
                 code: 1,
@@ -60,22 +64,28 @@ const badgeRouter = (() => {
             eligibility: false,
         });
     });
-    // example claim query:
-    // url: {{pathname}}/api/badge/claim?badge={{badgeContractAddress}}&recipient={{walletAddress}}
+    // Resolves claim data payload:
+    // curl 'localhost:3000/api/badge/claim?badge={{badge}}&recipient={{wallet}}'
     router.get("/claim", async (req, res) => {
         const { badge, recipient } = req.query;
         const badgeContractAddress = badge;
         const walletAddress = recipient;
         if (!walletAddress)
-            return res.json({ error: 'missing query parameter "walletAddress"' });
+            return res.json({
+                code: 0,
+                message: 'missing query parameter "recipient"',
+            });
         if (!badgeContractAddress)
-            return res.json({ error: 'missing parameter "address"' });
+            return res.json({ code: 0, message: 'missing parameter "badge"' });
         const scrollyBadge = badges_1.badges[(0, lib_1.normalizeAddress)(badgeContractAddress)];
         if (!scrollyBadge)
-            return res.json({ error: `unknown badge "${badgeContractAddress}"` });
+            return res.json({
+                code: 0,
+                message: `unknown badge "${badgeContractAddress}"`,
+            });
         const isEligible = await scrollyBadge.isEligible(walletAddress);
         if (!isEligible)
-            return res.json({ error: null, status: "not eligible" });
+            return res.json({ code: 0, message: "not eligible" });
         const proxy = new eip712_proxy_js_1.EIP712Proxy(scrollyBadge.proxy);
         const attestation = await (0, lib_1.createBadge)({
             badge: scrollyBadge.address,
@@ -84,12 +94,13 @@ const badgeRouter = (() => {
             proxy,
             signer,
         });
-        console.log("Populate attestation transaction:", attestation);
+        console.log("Populated attestation transaction:", attestation);
         const tx = await proxy.contract.attestByDelegation.populateTransaction(attestation);
-        console.log("Transaction:", tx);
-        res.json({ error: null, status: "eligible", tx });
+        console.log("Transaction to sign:", tx);
+        res.json({ code: 1, message: "success", tx });
     });
-    router.get("/", (_req, res) => res.send("Scrolly badge API 2"));
+    // Resolve api/ to avoid errors
+    router.get("/", (_req, res) => res.send("Scrolly badge API v1"));
     return router;
 })();
 exports.default = badgeRouter;

@@ -26,8 +26,8 @@ const options: cors.CorsOptions = {
 };
 app.use(cors(options));
 
-app.get("/", (_req, res) => res.send("Scrolly badge API"));
-app.get("/api/", (_req, res) => res.send("Scrolly badge API 1"));
+app.get("/", (_req, res) => res.send("Scrolly badge API v1"));
+app.get("/api/", (_req, res) => res.send("Scrolly badge API v1"));
 app.use("/api/badge/", badgeRouter);
 
 // catch 404 and forward to error handler

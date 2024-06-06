@@ -2,7 +2,6 @@ import scrollBadgeLevelsScrollyABI from "./abi/ScrollBadgeLevelsScrolly.json";
 import { normalizeAddress } from "./lib";
 import "dotenv/config.js";
 import { ethers } from "ethers";
-import fs from "fs";
 
 import badgesData from "./badges-data.json";
 // console.log("badges-data.json", badgesData);

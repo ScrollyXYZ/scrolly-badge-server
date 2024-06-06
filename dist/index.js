@@ -25,8 +25,8 @@ const options = {
     origin: allowedOrigins,
 };
 app.use((0, cors_1.default)(options));
-app.get("/", (_req, res) => res.send("Scrolly badge API"));
-app.get("/api/", (_req, res) => res.send("Scrolly badge API 1"));
+app.get("/", (_req, res) => res.send("Scrolly badge API v1"));
+app.get("/api/", (_req, res) => res.send("Scrolly badge API v1"));
 app.use("/api/badge/", badge_1.default);
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
