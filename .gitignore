@@ -1,3 +1,7 @@
 node_modules
-.env
 .vercel
+
+*.env
+*.env.*
+!*.env.template
+!*.env.*.template
